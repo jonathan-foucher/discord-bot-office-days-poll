@@ -1,0 +1,19 @@
+{
+  "name": "discord-bot-office-days-poll",
+  "version": "1.0.0",
+  "description": "A poll discord bot asking periodically what day(s) people will come at office for the next week",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathan-foucher/discord-bot-office-days-poll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathan-foucher/discord-bot-office-days-poll/issues"
+  },
+  "homepage": "https://github.com/jonathan-foucher/discord-bot-office-days-poll#readme"
+}
