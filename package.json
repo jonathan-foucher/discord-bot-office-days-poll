@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/jonathan-foucher/discord-bot-office-days-poll/issues"
   },
-  "homepage": "https://github.com/jonathan-foucher/discord-bot-office-days-poll#readme"
+  "homepage": "https://github.com/jonathan-foucher/discord-bot-office-days-poll#readme",
+  "dependencies": {
+    "discord.js": "^13.8.1",
+    "dotenv": "^16.0.1",
+    "node-cron": "^3.0.1",
+    "uuid": "^8.3.2"
+  }
 }
