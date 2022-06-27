@@ -11,8 +11,9 @@ const botToken = process.env.DISCORD_BOT_TOKEN;
 const channelId = process.env.POLL_CHANNEL_ID;
 const cronValue = process.env.CRON_VALUE;
 const pollQuestion = process.env.POLL_QUESTION;
-const pollResponses = process.env.POLL_RESPONSES.replaceAll('\\n', '\n');
-const pollReactions = process.env.POLL_REACTIONS.split(',');
+const pollResponses = process.env.POLL_RESPONSES.split(';');
+const pollReactions = process.env.POLL_RESPONSES.split(';')
+    .map(response => response.split(',')[0]);
 
 const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS]});
 
@@ -22,19 +23,24 @@ client.on('ready', () => {
 
 client.login(botToken);
 
-const exampleEmbed = new MessageEmbed()
+let description = '';
+for (let response of pollResponses) {
+    description += `${response.split(',').join(' ')}\n`;
+}
+
+const embed = new MessageEmbed()
     .setColor('#4f80de')
     .setTitle(pollQuestion)
-    .setDescription(pollResponses)
+    .setDescription(description)
     .setTimestamp();
 
 cron.schedule(cronValue, () => {
-    logger.info('Cron activated');
+    logger.info('Cron triggered');
     if (client && client.isReady()) {
         logger.info('Sending poll');
         client.channels.fetch(channelId)
-            .then(channel => channel.send({content: '@everyone', embeds: [exampleEmbed]})
-                .then(message => pollReactions.forEach(reaction =>  message.react(reaction)))
+            .then(channel => channel.send({content: '@everyone', embeds: [embed]})
+                .then(message => pollReactions.forEach(reaction => message.react(reaction)))
                 .catch(logger.error)
             )
             .catch(logger.error);
